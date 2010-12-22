@@ -1,4 +1,6 @@
-all: vim git bash scripts
+common: vim git bash scripts
+
+all: vim git bash scripts gentoo
 
 scripts:
 	cp -r HOME/bin/* ${HOME}/bin/
@@ -15,4 +17,9 @@ vim:
 
 git:
 	cp HOME/.gitconfig $(HOME)/
+
+gentoo: makeconf
+	
+makeconf:
+	cp misc/make.conf /etc/
 
