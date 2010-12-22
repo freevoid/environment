@@ -905,4 +905,6 @@ colorscheme torte
 "let g:miniBufExplModSelTarget = 1 
 let g:SuperTabDefaultCompletionType = "context"
 
+call pathogen#runtime_append_all_bundles("bundle-enabled") 
+
 " vim:tabstop=4 softtabstop=4 shiftwidth=4
