@@ -1,1 +1,0 @@
-../available/compiler/pylint.vim

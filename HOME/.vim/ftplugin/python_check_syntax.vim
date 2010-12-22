@@ -1,1 +1,0 @@
-../available/ftplugin/python_check_syntax.vim
