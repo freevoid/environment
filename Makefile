@@ -1,4 +1,7 @@
-all: vim git bash
+all: vim git bash scripts
+
+scripts:
+	cp -r HOME/bin/* ${HOME}/bin/
 
 bash: git-prompt
 	cp HOME/.bash* ${HOME}/
