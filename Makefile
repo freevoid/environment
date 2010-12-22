@@ -1,3 +1,5 @@
+.PHONY: makeconf git vim git-prompt scripts
+
 common: vim git bash scripts
 
 all: vim git bash scripts gentoo
