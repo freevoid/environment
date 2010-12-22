@@ -1,0 +1,11 @@
+#!/bin/sh
+SHELL=sh
+if [ -n "$2" ]; then 
+    echo "#!/bin/$SHELL" > $2
+    echo "$1" >> $2
+    chmod +x $2
+else
+    echo "#!/bin/$SHELL"
+    echo "$1"
+fi
+
