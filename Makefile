@@ -2,7 +2,9 @@
 
 common: vim git bash scripts
 
-all: vim git bash scripts gentoo
+rich: common texmf
+
+full: rich gentoo
 
 scripts:
 	cp -r HOME/bin/* ${HOME}/bin/
@@ -19,6 +21,11 @@ vim:
 
 git:
 	cp HOME/.gitconfig $(HOME)/
+
+texmf:
+	mkdir -p $(HOME)/texmf/
+	cp -r HOME/texmf/* $(HOME)/texmf/
+	mktexlsr $(HOME)/texmf
 
 gentoo: makeconf
 	
