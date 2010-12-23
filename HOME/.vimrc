@@ -607,6 +607,8 @@ if has("menu")
 
 endif
 
+" Установка omnifunc в дефолтный syntaxComplete
+set ofu=syntaxcomplete#Complete
 " --- авто-команды ---
 
 if has("autocmd")
@@ -627,7 +629,15 @@ if has("autocmd")
 	autocmd! cursormovedi,insertleave * if !pumvisible() | pclose | endif
 
 	" автоматически перечитывать файл конфигурации VIM после его сохранения
-	autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+	autocmd! bufwritepost $MYVIMRC source $MYVIMR
+
+
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags 
 
 endif
 
