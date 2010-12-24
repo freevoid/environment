@@ -1,3 +1,7 @@
 [submodule "HOME/.vim/bundle-available/snipmate"]
 	path = HOME/.vim/bundle-available/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
+
+[submodule "HOME/.vim/bundle-available/nerdtree"]
+	path = HOME/.vim/bundle-available/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
