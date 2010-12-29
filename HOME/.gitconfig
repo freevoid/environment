@@ -2,3 +2,15 @@
 	name = Nikolay Zakharov
 	email = nikolay.desh@gmail.com
 
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+
+[push]
+    default = matching
+
+[core]
+    editor = vim
+
