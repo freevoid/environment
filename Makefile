@@ -2,7 +2,7 @@
 
 common: vim git bash scripts
 
-rich: common texmf
+rich: common texmf X
 
 full: rich gentoo
 
@@ -31,4 +31,7 @@ gentoo: makeconf
 	
 makeconf:
 	cp misc/make.conf /etc/
+
+X:
+	cp HOME/.Xresources ${HOME}/
 
