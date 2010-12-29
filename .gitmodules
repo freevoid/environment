@@ -13,3 +13,6 @@
 [submodule "HOME/.vim/bundle-available/vcscommand"]
 	path = HOME/.vim/bundle-available/vcscommand
 	url = git://repo.or.cz/vcscommand.git
+[submodule "HOME/.vim/bundle-available/vim-surround"]
+	path = HOME/.vim/bundle-available/vim-surround
+	url = https://github.com/tpope/vim-surround.git
