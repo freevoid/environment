@@ -2,9 +2,14 @@
 	path = HOME/.vim/bundle-available/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
 
+[submodule "HOME/.vim/bundle-available/zencoding-vim"]
+	path = HOME/.vim/bundle-available/zencoding-vim
+	url = https://github.com/mattn/zencoding-vim.git
+
 [submodule "HOME/.vim/bundle-available/nerdtree"]
 	path = HOME/.vim/bundle-available/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+
 [submodule "HOME/.vim/bundle-available/vcscommand"]
 	path = HOME/.vim/bundle-available/vcscommand
 	url = git://repo.or.cz/vcscommand.git
