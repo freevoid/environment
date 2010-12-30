@@ -1,5 +1,10 @@
 .PHONY: makeconf git vim git-prompt scripts
 
+BASH_CONFIGS=$(patsubst HOME/%, ${HOME}/%, $(wildcard HOME/.bash*))
+
+${HOME}/.%: HOME/.%
+	cp $< $@
+
 common: vim git bash scripts
 
 rich: common texmf X
@@ -9,18 +14,15 @@ full: rich gentoo
 scripts:
 	cp -r HOME/bin/* ${HOME}/bin/
 
-bash: git-prompt
-	cp HOME/.bash* ${HOME}/
+bash: git-prompt $(BASH_CONFIGS)
 	
-git-prompt:
-	cp HOME/.git-prompt.sh ${HOME}/
+git-prompt: ${HOME}/.git-prompt.sh
 	cp HOME/.config/git-prompt.conf ${HOME}/.config/
 
 vim:
-	cp -r HOME/.vimrc HOME/.vim ${HOME}/
+	cd HOME; find .vim/ ! -regex ".*/\.git.*" ! -type d | xargs -l1 -iARG cp --parents -P ARG ${HOME}/
 
-git:
-	cp HOME/.gitconfig $(HOME)/
+git: $(HOME)/.gitconfig
 
 texmf:
 	mkdir -p $(HOME)/texmf/
@@ -31,7 +33,7 @@ gentoo: makeconf
 	
 makeconf:
 	cp misc/make.conf /etc/
-
-X:
-	cp HOME/.Xresources ${HOME}/
+	
+X:	$(HOME)/.Xresources
+	xrdb -merge $<
 
