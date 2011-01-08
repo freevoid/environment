@@ -106,6 +106,10 @@ if [ -d "$HOME/lib/python" ] ; then
     export PYTHONPATH="$HOME/lib/python:$PYTHONPATH"
 fi
 
+if [ -d "$HOME/lib/erlang" ] ; then
+    export ERL_LIBS="$HOME/lib/erlang:$ERL_LIBS"
+fi
+
 if [ -d "$HOME/workspace" ] ; then
     export PYTHONPATH="$HOME/workspace:$PYTHONPATH"
 fi
