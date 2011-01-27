@@ -241,7 +241,9 @@ endif
 set whichwrap=b,s,h,l,<,>,~,[,]
 
 " переключение режима отступов при вставке
-set pastetoggle=<F12>
+nnoremap <C-P> :set invpaste paste?<CR>
+set pastetoggle=<C-P>
+set showmode
 
 " использовать wildmenu ...
 set wildmenu
@@ -524,9 +526,9 @@ inoremap <C-F2> <C-O>:wall<CR>
 vnoremap <C-F2> <ESC>:wall<CR>
 
 " скрыть результаты поиска
-nnoremap <F3> :nohlsearch<CR>:echo "nohlsearch"<CR>
-inoremap <F3> <C-O>:nohlsearch<CR><C-O>:echo "nohlsearch"<CR>
-vnoremap <F3> <ESC>:nohlsearch<CR>:echo "nohlsearch"<CR>
+nnoremap <C-H> :nohlsearch<CR>:echo "nohlsearch"<CR>
+inoremap <C-H> <C-O>:nohlsearch<CR><C-O>:echo "nohlsearch"<CR>
+vnoremap <C-H> <ESC>:nohlsearch<CR>:echo "nohlsearch"<CR>
 
 " перенос строк
 nnoremap <F4> :setlocal wrap! wrap?<CR>

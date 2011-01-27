@@ -21,6 +21,7 @@ git-prompt: ${HOME}/.git-prompt.sh
 
 vim:
 	cd HOME; find .vim/ ! -regex ".*/\.git.*" ! -type d | xargs -l1 -iARG cp --parents -P ARG ${HOME}/
+	cp HOME/.vimrc ${HOME}/
 
 git: $(HOME)/.gitconfig
 
