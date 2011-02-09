@@ -1,17 +1,40 @@
+## =============================== xterm ====================================
+xterm*background: black
+xterm*foreground: white
+
+## =============================== urxvt ====================================
+
+## general options
 URxvt.buffered:         true
-URxvt.background:       black
-URxvt.foreground:       white
-URxvt.cursorColor:      green
-URxvt.underlineColor:   yellow
-URxvt.font:             xft:Terminus:pixelsize=14:antialias=false
-URxvt.boldFont:         xft:Terminus:bold:pixelsize=14:antialias=false
+URxvt*termName: rxvt-unicode
+
+## extensions
 URxvt.perl-ext-common:  default,tabbed,clipboard,matcher
-URxvt.urlLauncher: /usr/bin/firefox
+URxvt.urlLauncher:      /usr/bin/opera
 URxvt.matcher.button: 1
 URxvt.scrollBar: false
 
-xterm*background: black
-xterm*foreground: white
+## borderless and no scrollbar
+##URxvt*scrollBar_right: false
+##URxvt*scrollBar: false
+URxvt*borderLess: false
+
+## geometry and font
+URxvt.font:             xft:Terminus:pixelsize=14:antialias=false
+URxvt.boldFont:         xft:Terminus:bold:pixelsize=14:antialias=false
+!URxvt*geometry: 84×24
+
+## pseudo-transparency stuff
+URxvt*inheritPixmap: true
+URxvt*tintColor: white
+URxvt*shading: 20
+
+## colors stuff
+
+! buggy almost everywhere
+!URxvt.depth: 32
+!URxvt.background: rgba:0000/0000/0000/dddd
+
 
 ! urxvt defaults:
 ! color0 (black) = Black
@@ -31,44 +54,25 @@ xterm*foreground: white
 ! color14 (bright cyan) = Cyan
 ! color15 (bright white) = White
 
-! Black
-!URxvt.color1: Black
-! Red
-URxvt.color1: brown2
-! Green
-URxvt.color2: SpringGreen2
-! Yellow
-URxvt.color3: yellow2
-! Blue
-URxvt.color4: DeepSkyBlue2
-! Magenta
-URxvt.color5: magenta2
-! Cyan
-URxvt.color6: DarkSlateGray1
-! White
-URxvt.color7: MintCream
-! Bright black
-!URxvt.color8: Grey25
-! Bright red
-URxvt.color9: firebrick1
-! Bright green
-URxvt.color10: SpringGreen1
-! Bright yellow
-URxvt.color11: yellow1
-! Bright blue
-URxvt.color12: DeepSkyBlue1
-! Bright magenta
-URxvt.color13: magenta1
-! Bright cyan
-URxvt.color14: cyan1
-! Bright white
-!URxvt.color15: White
-
-! Alternatives
-! Blue: lighter (looks closer to cyan, but it is an option if deepsky is too
-! dark to read (it might be a good idea to make symlinks green))
-!URxvt.color4: SteelBlue2
-!URxvt.color12: SteelBlue1
-!URxvt.color6: cyan1
-
-
+## change default colors
+## gnome tango palette
+URxvt.cursorColor:      green
+URxvt.underlineColor:   yellow
+URxvt*background: #000000
+URxvt*foreground: #EEEEEC
+URxvt*color0: #000000
+URxvt*color1: #CC0000
+URxvt*color2: #4E9A06
+URxvt*color3: #C4A000
+URxvt*color4: #3465A4
+URxvt*color5: #75507B
+URxvt*color6: #06989A
+URxvt*color7: #D3D7CF
+URxvt*color8: #555753
+URxvt*color9: #EF2929
+URxvt*color10: #8AE234
+URxvt*color11: #FCE94F
+URxvt*color12: #729FCF
+URxvt*color13: #AD7FA8
+URxvt*color14: #34E2E2
+URxvt*color15: #EEEEEC

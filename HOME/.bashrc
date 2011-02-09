@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+case "$TERM" in
+    rxvt-256color) TERM=rxvt-unicode; export TERM;;
+esac
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -91,7 +95,7 @@ fi
 
 # GPG stuff
 if [ -z "$(ps -u $USER | grep gpg-agent)" ]; then
-   rm $HOME/.gnupg/S.gpg-agent
+   rm -f $HOME/.gnupg/S.gpg-agent
    eval $(/usr/bin/gpg-agent --daemon --use-standard-socket)
    echo gpg-agent started
 else
