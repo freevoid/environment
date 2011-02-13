@@ -10,7 +10,7 @@
 [ -z "$PS1" ] && return
 
 if [[ -z $DISPLAY && $(tty) = /dev/tty1 ]]; then
-    exec xinit -- /usr/bin/X --nolisten tcp
+    exec xinit
 fi
 
 force_color_prompt=1
