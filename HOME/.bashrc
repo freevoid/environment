@@ -2,12 +2,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-case "$TERM" in
-    rxvt-256color) TERM=rxvt-unicode; export TERM;;
-esac
+#case "$TERM" in
+#    rxvt-256color) TERM=rxvt-unicode; export TERM;;
+#esac
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+if [[ -z $DISPLAY && $(tty) = /dev/tty1 ]]; then
+    exec xinit -- /usr/bin/X --nolisten tcp
+fi
 
 force_color_prompt=1
 
@@ -94,15 +98,18 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # GPG stuff
-if [ -z "$(ps -u $USER | grep gpg-agent)" ]; then
-   rm -f $HOME/.gnupg/S.gpg-agent
-   eval $(/usr/bin/gpg-agent --daemon --use-standard-socket)
-   echo gpg-agent started
-else
-  export GPG_AGENT_INFO=$HOME/.gnupg/S.gpg-agent:$(ps -u $USER | grep gpg-agent | awk '{print $1}'):1 
-fi
 
-export GPG_TTY=`tty`
+if [ -n "$GPG_AGENT_ENABLED" ]; then
+    if [ -z "$(ps -u $USER | grep gpg-agent)" ]; then
+    rm -f $HOME/.gnupg/S.gpg-agent
+    eval $(/usr/bin/gpg-agent --daemon --use-standard-socket)
+    echo gpg-agent started
+    else
+    export GPG_AGENT_INFO=$HOME/.gnupg/S.gpg-agent:$(ps -u $USER | grep gpg-agent | awk '{print $1}'):1 
+    fi
+
+    export GPG_TTY=`tty`
+fi
 
 # PATH tweaking
 
