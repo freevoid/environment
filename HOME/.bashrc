@@ -10,10 +10,6 @@ if [ -f ~/.bash_def ] ; then
     . ~/.bash_def
 fi
 
-if [[ -n "$exec_xinit" && -z $DISPLAY && $(tty) = /dev/tty1 ]]; then
-    exec xinit
-fi
-
 # append to the history file, don't overwrite it
 shopt -s histappend
 

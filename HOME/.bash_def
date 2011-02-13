@@ -1,6 +1,8 @@
 export EDITOR=vim
 force_color_prompt=1
 
+exec_xinit=1
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
