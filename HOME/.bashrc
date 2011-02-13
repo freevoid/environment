@@ -2,29 +2,20 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-#case "$TERM" in
-#    rxvt-256color) TERM=rxvt-unicode; export TERM;;
-#esac
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-if [[ -z $DISPLAY && $(tty) = /dev/tty1 ]]; then
+# source variable definitions / exports
+if [ -f ~/.bash_def ] ; then
+    . ~/.bash_def
+fi
+
+if [[ -n "$exec_xinit" && -z $DISPLAY && $(tty) = /dev/tty1 ]]; then
     exec xinit
 fi
 
-force_color_prompt=1
-
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
-
 # append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -129,7 +120,6 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-export EDITOR=vim
 
 # including file where different individual information is present
 
