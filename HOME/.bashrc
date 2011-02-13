@@ -129,6 +129,10 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+export EDITOR=vim
+
 # including file where different individual information is present
 
-. ~/.bash_personal
+if [ -f ~/.bash_personal ] ; then
+    . ~/.bash_personal
+fi
