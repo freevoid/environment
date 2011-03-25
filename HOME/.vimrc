@@ -917,6 +917,14 @@ colorscheme torte
 "let g:miniBufExplModSelTarget = 1 
 let g:SuperTabDefaultCompletionType = "context"
 
+let ropevim_guess_project=1
+let ropevim_goto_def_newwin=1
+let ropevim_vim_completion=0
+let ropevim_extended_complete=1
+
+imap \/ <C-R>=RopeCodeAssistInsertMode()<cr>
+imap \? <C-R>=RopeLuckyAssistInsertMode()<cr>
+
 call pathogen#runtime_append_all_bundles("bundle-enabled") 
 
 " vim:tabstop=4 softtabstop=4 shiftwidth=4
