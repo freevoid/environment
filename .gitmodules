@@ -13,6 +13,15 @@
 [submodule "HOME/.vim/bundle-available/vcscommand"]
 	path = HOME/.vim/bundle-available/vcscommand
 	url = git://repo.or.cz/vcscommand.git
+
 [submodule "HOME/.vim/bundle-available/vim-surround"]
 	path = HOME/.vim/bundle-available/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+
+[submodule "HOME/.vim/bundle-available/jslint"]
+	path = HOME/.vim/bundle-available/jslint
+	url = https://github.com/hallettj/jslint.vim.git
+
+[submodule "HOME/.vim/bundle-available/fugitive"]
+	path = HOME/.vim/bundle-available/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
