@@ -6,9 +6,11 @@ AVAILABLE_BUNDLES_DIRNAME = 'bundle-available'
 ENABLED_BUNDLES_DIRNAME = 'bundle-enabled'
 
 get_vim_path = lambda: os.path.join(os.environ.get('HOME'), '.vim')
-get_default_config_path = lambda: os.path.join(get_vim_path(), 'vim_bundler.json')
+get_default_config_path = lambda: os.path.join(get_vim_path(),
+        'vim_bundler.json')
 
 COMMANDS = {}
+
 
 def register_command(cmd_name=None, pool=COMMANDS):
 
@@ -17,9 +19,10 @@ def register_command(cmd_name=None, pool=COMMANDS):
             pool[function.__name__] = function
         else:
             pool[cmd_name] = function
-        return function   
+        return function
 
     return decorator
+
 
 def get_action_by_name(cmd_name):
     action = COMMANDS.get(cmd_name)
@@ -28,12 +31,15 @@ def get_action_by_name(cmd_name):
 
     return action
 
+
 def _print_dir_listing(dirname):
-    print '\n'.join(sorted(get_bundles(dirname)))
+    print('\n'.join(sorted(get_bundles(dirname))))
+
 
 @register_command()
 def list_enabled(enabled_bundles_dir, **kwargs):
     _print_dir_listing(enabled_bundles_dir)
+
 
 @register_command()
 def list_available(available_bundles_dir, enabled_bundles_dir, **kwargs):
@@ -41,10 +47,12 @@ def list_available(available_bundles_dir, enabled_bundles_dir, **kwargs):
     enabled = set(get_bundles(enabled_bundles_dir))
 
     bundles = (b if b not in enabled else '*' + b for b in sorted(available))
-    print '\n'.join(bundles)
+    print('\n'.join(bundles))
+
 
 def get_bundles(dirname):
     return os.listdir(dirname)
+
 
 @register_command()
 def enable(to_enable, available_bundles_dir, enabled_bundles_dir, **kwargs):
@@ -55,8 +63,12 @@ def enable(to_enable, available_bundles_dir, enabled_bundles_dir, **kwargs):
 
     available_path = os.path.join('..', AVAILABLE_BUNDLES_DIRNAME, to_enable)
     enabled_path = os.path.join(enabled_bundles_dir, to_enable)
+    if os.access(enabled_path, os.F_OK):
+        raise ValueError("Bundle already enabled: %s" % to_enable)
+
     os.symlink(available_path, enabled_path)
-    print "Bundle %s enabled" % to_enable
+    print("Bundle %s enabled" % to_enable)
+
 
 @register_command()
 def disable(to_disable, available_bundles_dir, enabled_bundles_dir, **kwargs):
@@ -66,7 +78,8 @@ def disable(to_disable, available_bundles_dir, enabled_bundles_dir, **kwargs):
 
     enabled_path = os.path.join(enabled_bundles_dir, to_disable)
     os.remove(enabled_path)
-    print "Bundle %s disabled" % to_disable
+    print("Bundle %s disabled" % to_disable)
+
 
 def command_argparser(command):
     def decorator(parser_builder):
@@ -74,17 +87,20 @@ def command_argparser(command):
         return parser_builder
     return decorator
 
+
 @command_argparser(disable)
 def disable_argparser():
     p = argparse.ArgumentParser()
     p.add_argument('to_disable')
     return p
 
+
 @command_argparser(enable)
 def enable_argparser():
     p = argparse.ArgumentParser()
     p.add_argument('to_enable')
     return p
+
 
 class BundleManager(object):
 
@@ -108,10 +124,14 @@ class BundleManager(object):
 
 
 def main():
-    main_parser = argparse.ArgumentParser(description='Vim bundles management utility', add_help=False)
-    main_parser.add_argument('action', action='store', type=BundleManager.get_action)
-    main_parser.add_argument('--config', dest='config_path', action='store', default=get_default_config_path())
-    main_parser.add_argument('--vimdir', dest='vim_dir', action='store', default=get_vim_path())
+    main_parser = argparse.ArgumentParser(
+            description='Vim bundles management utility', add_help=False)
+    main_parser.add_argument('action', action='store',
+            type=BundleManager.get_action, default='list_available', nargs='?')
+    main_parser.add_argument('--config', dest='config_path', action='store',
+            default=get_default_config_path())
+    main_parser.add_argument('--vimdir', dest='vim_dir', action='store',
+            default=get_vim_path())
 
     parsed_args, rest_args = main_parser.parse_known_args()
     if hasattr(parsed_args.action, 'get_argparser'):
@@ -124,9 +144,9 @@ def main():
 
     try:
         manager.perform_action()
-    except BaseException, e:
-        print e
+    except BaseException as e:
+        print(e)
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     main()
-
