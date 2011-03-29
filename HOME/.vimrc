@@ -381,6 +381,9 @@ highlight tablinefill term=none cterm=none ctermbg=lightgray gui=none guibg=#D3D
 " Показать TagList слева
 nnoremap <silent> <S-TAB> :TlistToggle<CR>
 
+" Показать NERDTree слева
+nnoremap <silent> <TAB> :NERDTreeToggle<CR>
+
 " быстрое редактирование конфигурации VIM
 nnoremap <silent>,v :tabnew $MYVIMRC<CR>
 
