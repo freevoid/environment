@@ -1,10 +1,8 @@
 "
 " Файл конфигурации VIM — ~/.vimrc
-" Mon Aug  2 14:56:45 EEST 2010
 "
-" Nikolay Frantsev <code [at] frantsev (dot) ru>
+" Original by: Nikolay Frantsev <code [at] frantsev (dot) ru>
 " http://frantsev.ru/configs/vimrc.txt
-" http://frantsev.ru/configs/vimrc.html
 "
 
 " --- параметры ---
@@ -911,7 +909,15 @@ set makeprg=make
 compiler gcc
 endif
 
-colorscheme torte
+" Подсвечиваем trailing whitespaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+colorscheme 256-jungle
 
 " Plugin related configs
 "let g:miniBufExplMapWindowNavVim = 1
