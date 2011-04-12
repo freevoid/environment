@@ -1,0 +1,84 @@
+! =============================== xterm ====================================
+xterm*background: black
+xterm*foreground: white
+xterm*bellIsUrgent: true
+
+! =============================== urxvt ====================================
+
+! extensions
+URxvt.perl-ext-common:  default,tabbed,matcher
+URxvt.urlLauncher:      chromium
+URxvt.matcher.button:   1
+
+! general options
+URxvt.buffered:         true
+URxvt*termName: rxvt-unicode
+! borderless and no scrollbar
+!URxvt*scrollBar_right: false
+URxvt*cursorBlink: true
+URxvt*urgentOnBell: true
+URxvt*visualBell: false
+URxvt*skipBuiltinGlyphs: true
+URxvt*borderLess: false
+URxvt.scrollBar: false
+URxvt*meta8: true
+URxvt*modifier: alt
+
+
+! geometry and font
+URxvt.font:             xft:Terminus:pixelsize=14:antialias=true
+URxvt.boldFont:         xft:Terminus:bold:pixelsize=14:antialias=true
+!URxvt*geometry: 84×24
+
+! pseudo-transparency stuff
+! URxvt*inheritPixmap: true
+! URxvt*tintColor: white
+! URxvt*shading: 20
+
+! colors stuff
+
+! buggy almost everywhere
+!URxvt.depth: 32
+!URxvt.background: rgba:0000/0000/0000/dddd
+
+
+! urxvt defaults:
+! color0 (black) = Black
+! color1 (red) = Red3
+! color2 (green) = Green3
+! color3 (yellow) = Yellow3
+! color4 (blue) = Blue3
+! color5 (magenta) = Magenta3
+! color6 (cyan) = Cyan3
+! color7 (white) = AntiqueWhite
+! color8 (bright black) = Grey25
+! color9 (bright red) = Red
+! color10 (bright green) = Green
+! color11 (bright yellow) = Yellow
+! color12 (bright blue) = Blue
+! color13 (bright magenta) = Magenta
+! color14 (bright cyan) = Cyan
+! color15 (bright white) = White
+
+! change default colors
+! gnome tango palette
+URxvt.cursorColor: #AD7FA8
+URxvt.underlineColor:   #735184
+*background: #000000
+*foreground: #EEEEEC
+*color0: #000000
+*color1: #CC0000
+*color2: #4E9A06
+*color3: #C4A000
+*color4: #3465A4
+*color5: #75507B
+*color6: #06989A
+*color7: #D3D7CF
+*color8: #555753
+*color9: #EF2929
+*color10: #8AE234
+*color11: #FCE94F
+*color12: #729FCF
+*color13: #AD7FA8
+*color14: #34E2E2
+*color15: #EEEEEC

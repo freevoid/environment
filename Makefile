@@ -15,7 +15,7 @@ scripts:
 	cp -r HOME/bin/* ${HOME}/bin/
 
 bash: git-prompt $(BASH_CONFIGS)
-	
+
 git-prompt: ${HOME}/.git-prompt.sh
 	cp HOME/.config/git-prompt.conf ${HOME}/.config/
 
@@ -31,10 +31,10 @@ texmf:
 	mktexlsr $(HOME)/texmf
 
 gentoo: makeconf
-	
+
 makeconf:
 	cp misc/make.conf /etc/
-	
-X:	$(HOME)/.Xresources
+
+X:	$(HOME)/.Xdefaults
 	xrdb -merge $<
 
