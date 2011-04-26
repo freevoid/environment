@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ -f debian/changelog ]; then
+    VERSION=`head -n 1 debian/changelog  | sed 's/.*(\([^)].*\)).*/\1/'`
+    if [ -n VERSION ]; then
+        git add debian/changelog
+        git commit -m "Changelog update: $VERSION"
+        git tag $VERSION
+    else
+        echo "Cannot determine version!" >&2
+        exit 1
+    fi
+else
+    echo "Cannot find regular file debian/changelog" >&2
+    exit 1
+fi
+
