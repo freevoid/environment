@@ -1,2 +1,2 @@
 #!/bin/sh
-git status | grep "^# Changed but not updated" -A 99999999 | grep "^#.deleted: " | awk '{print $3;}' | xargs git rm
+git status | grep "^# \(Changed but not updated\|Changes not staged for commit\)" -A 99999999 | grep "^#.deleted: " | awk '{print $3;}' | xargs git rm
