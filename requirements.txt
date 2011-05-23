@@ -1,4 +1,4 @@
 exuberant-ctags
 pyflakes
 coreutils
-
+python-rope
