@@ -12,16 +12,24 @@ rich: common texmf X
 full: rich gentoo
 
 scripts:
+	mkdir -p ${HOME}/bin/
 	cp -r HOME/bin/* ${HOME}/bin/
 
 bash: git-prompt $(BASH_CONFIGS)
 
 git-prompt: ${HOME}/.git-prompt.sh
+	mkdir -p ${HOME}/.config/
 	cp HOME/.config/git-prompt.conf ${HOME}/.config/
 
-vim: submodules
+vim: submodules ropevim
 	cd HOME; find .vim/ ! -regex ".*/\.git.*" ! -type d | xargs -l1 -iARG cp --parents -P ARG ${HOME}/
 	cp HOME/.vimrc ${HOME}/
+
+ropevim: ${HOME}/lib/python/ropevim.py
+
+${HOME}/lib/python/ropevim.py: HOME/lib/python/ropevim.py
+	mkdir -p ${HOME}/lib/python/
+	cp $< $@
 
 submodules:
 	git submodule init
