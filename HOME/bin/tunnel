@@ -1,0 +1,5 @@
+#!/bin/sh
+host=$1
+port=${2:-8000}
+local_port=${3:-8000}
+ssh -N -L $port:localhost:$port $host
