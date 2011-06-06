@@ -1,0 +1,1 @@
+. `find $HOME/.bash_completion.d/ -mindepth 1 -maxdepth 1`
