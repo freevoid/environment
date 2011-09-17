@@ -84,19 +84,26 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# GPG stuff
+# ssh- gpg- agents stuff
 
-if [ -n "$GPG_AGENT_ENABLED" ]; then
-    if [ -z "$(ps -u $USER | grep gpg-agent)" ]; then
-    rm -f $HOME/.gnupg/S.gpg-agent
-    eval $(/usr/bin/gpg-agent --daemon --use-standard-socket)
-    echo gpg-agent started
-    else
-    export GPG_AGENT_INFO=$HOME/.gnupg/S.gpg-agent:$(ps -u $USER | grep gpg-agent | awk '{print $1}'):1 
+# if there are keychain on the path, use it
+which keychain > /dev/null
+if [ $? == 0 ]; then
+    eval $(keychain --eval id_rsa)
+else
+    if [ -n "$GPG_AGENT_ENABLED" ]; then
+        if [ -z "$(ps -u $USER | grep gpg-agent)" ]; then
+        rm -f $HOME/.gnupg/S.gpg-agent
+        eval $(/usr/bin/gpg-agent --daemon --use-standard-socket)
+        echo gpg-agent started
+        else
+        export GPG_AGENT_INFO=$HOME/.gnupg/S.gpg-agent:$(ps -u $USER | grep gpg-agent | awk '{print $1}'):1 
+        fi
+
+        export GPG_TTY=`tty`
     fi
-
-    export GPG_TTY=`tty`
 fi
+
 
 # PATH tweaking
 
@@ -116,9 +123,11 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
 
-# including file where different individual information is present
-
-if [ -f ~/.bash_personal ] ; then
-    . ~/.bash_personal
+# including local file to source environment-specific stuff
+if [ -f ~/.bash_local ] ; then
+    . ~/.bash_local
 fi
