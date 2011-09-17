@@ -3,7 +3,7 @@
 BASH_CONFIGS=$(patsubst HOME/%, ${HOME}/%, $(wildcard HOME/.bash*))
 
 ${HOME}/.%: HOME/.%
-	cp $< $@
+	cp -r $< $@
 
 common: vim git bash scripts
 
