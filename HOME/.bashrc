@@ -104,6 +104,8 @@ else
     fi
 fi
 
+# Stopping CTRL-S/CTRL-Q stuff
+stty ixoff -ixon
 
 # PATH tweaking
 
