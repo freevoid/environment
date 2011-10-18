@@ -59,11 +59,6 @@ set t_Co=256
 " разрешить backspace в режиме вставки
 set backspace=2
 
-" наследовать отступы предыдущей строки
-set autoindent
-
-" умные отступы на основе синтаксиса
-set smartindent
 
 " умные отступы после некоторых слов
 set cinwords+=elseif,foreach
@@ -80,6 +75,7 @@ if has("autocmd")
 	" определять тип файла автоматически
 	filetype plugin on
 
+	filetype plugin indent on
 endif
 
 " показывать строку с позицией курсора
