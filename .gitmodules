@@ -1,33 +1,3 @@
-[submodule "HOME/.vim/bundle-available/snipmate"]
-	path = HOME/.vim/bundle-available/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
-
-[submodule "HOME/.vim/bundle-available/zencoding-vim"]
-	path = HOME/.vim/bundle-available/zencoding-vim
-	url = https://github.com/mattn/zencoding-vim.git
-
-[submodule "HOME/.vim/bundle-available/nerdtree"]
-	path = HOME/.vim/bundle-available/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-
-[submodule "HOME/.vim/bundle-available/vcscommand"]
-	path = HOME/.vim/bundle-available/vcscommand
-	url = git://repo.or.cz/vcscommand.git
-
-[submodule "HOME/.vim/bundle-available/vim-surround"]
-	path = HOME/.vim/bundle-available/vim-surround
-	url = https://github.com/tpope/vim-surround.git
-
-[submodule "HOME/.vim/bundle-available/jslint"]
-	path = HOME/.vim/bundle-available/jslint
-	url = https://github.com/hallettj/jslint.vim.git
-
-[submodule "HOME/.vim/bundle-available/fugitive"]
-	path = HOME/.vim/bundle-available/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "HOME/.vim/bundle-available/solarized"]
-	path = HOME/.vim/bundle-available/solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "HOME/.vim/bundle-available/vim-ipython"]
-	path = HOME/.vim/bundle-available/vim-ipython
-	url = https://github.com/ivanov/vim-ipython
+[submodule "HOME/.vim/bundle/Vundle.vim"]
+	path = HOME/.vim/bundle/Vundle.vim
+	url = https://github.com/gmarik/Vundle.vim

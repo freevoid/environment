@@ -1,4 +1,32 @@
 set nocompatible
+filetype off
+
+" set the runtime path to include Vundle and initialize
+if has("win32")
+	set rtp+=~\\vimfiles\\bundle\\Vundle.vim
+else
+	set rtp+=~/.vim/bundle/Vundle.vim
+endif
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-pathogen'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'taglist.vim'
+Plugin 'Vimball'
+"Plugin 'mattn/zencoding-vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+filetype plugin indent on
 
 " Do not use system locale
 if has("unix")
@@ -43,11 +71,6 @@ set backspace=indent,eol,start
 
 if !&diff
 	syntax enable
-endif
-
-if has("autocmd")
-	filetype plugin on
-	filetype plugin indent on
 endif
 
 " Automatically set working directory to the directory of currently opened file
@@ -409,7 +432,7 @@ let ropevim_extended_complete=1
 
 imap \/ <C-R>=RopeCodeAssistInsertMode()<cr>
 
-call pathogen#runtime_append_all_bundles("bundle-enabled")
+" call pathogen#runtime_append_all_bundles("bundle-enabled")
 
 " Color scheme
 if has('gui')
