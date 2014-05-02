@@ -19,6 +19,8 @@ Plugin 'tpope/vim-pathogen'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'kevinw/pyflakes-vim'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'taglist.vim'
 Plugin 'Vimball'
 "Plugin 'mattn/zencoding-vim'
@@ -443,5 +445,9 @@ else
 	" Use 256-jungle in terminal
 	colorscheme 256-jungle
 endif
+
+" Syntastic
+" Disable python checkers because we use pyflakes-vim for that
+let g:syntastic_python_checkers = []
 
 " vim:tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
