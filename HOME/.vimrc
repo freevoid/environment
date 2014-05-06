@@ -2,11 +2,11 @@ set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
-if has("win32")
-	set rtp+=~\\vimfiles\\bundle\\Vundle.vim
-else
-	set rtp+=~/.vim/bundle/Vundle.vim
-endif
+let win_shell = (has('win32') || has('win64')) && &shellcmdflag =~ '/'
+let vim_dir = win_shell ? '$HOME/vimfiles' : '$HOME/.vim'
+let &runtimepath .= ',' . expand(vim_dir . '/bundle/Vundle.vim')
+call vundle#rc(expand(vim_dir . '/bundle'))
+
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -20,9 +20,10 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'kevinw/pyflakes-vim'
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'taglist.vim'
 Plugin 'Vimball'
+Plugin 'LargeFile'
 "Plugin 'mattn/zencoding-vim'
 
 " All of your Plugins must be added before the following line
