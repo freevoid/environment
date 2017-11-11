@@ -1,35 +1,48 @@
 set nocompatible
 filetype off
 
+" Make sure VIM uses POSIX-compatible shell
+if &shell =~# 'fish$'
+    set shell=bash
+endif
+
 " set the runtime path to include Vundle and initialize
-let win_shell = (has('win32') || has('win64')) && &shellcmdflag =~ '/'
-let vim_dir = win_shell ? '$HOME/vimfiles' : '$HOME/.vim'
-let &runtimepath .= ',' . expand(vim_dir . '/bundle/Vundle.vim')
-call vundle#rc(expand(vim_dir . '/bundle'))
+call plug#begin('~/.vim/plugged')
 
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+Plug 'Shougo/vimproc.vim'
+Plug 'Valloric/ListToggle'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dag/vim-fish'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'edkolev/tmuxline.vim'
+Plug 'idanarye/vim-vebugger'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'kana/vim-fakeclip'
+Plug 'mbbill/undotree'
+Plug 'mhinz/vim-signify'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'sjl/gundo.vim'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-pathogen'
+Plug 'tpope/vim-projectionist'
+Plug 'vim-scripts/LargeFile'
+Plug 'vim-scripts/taglist.vim'
+Plug 'wannesm/wmgraphviz.vim'
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+call plug#end()
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-pathogen'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'kevinw/pyflakes-vim'
-"Plugin 'davidhalter/jedi-vim'
-Plugin 'taglist.vim'
-Plugin 'Vimball'
-Plugin 'LargeFile'
-"Plugin 'mattn/zencoding-vim'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
-filetype plugin indent on
+filetype off
 
 " Do not use system locale
 if has("unix")
@@ -56,25 +69,8 @@ else
 	set directory=~/.vim/swap
 endif
 
-if has("win32")
-	set viminfo='128,/64,:64,<64,s10,h,n~\\vimfiles\\viminfo
-else
-	set viminfo='128,/64,:64,<64,s10,h,n~/.vim/viminfo
-endif
-
-" Shorten timeout for key codes
-set ttimeoutlen=100
-
-
-" Use 256-color terminal palette
-set t_Co=256
-
 " Allow using backspace in insert mode
 set backspace=indent,eol,start
-
-if !&diff
-	syntax enable
-endif
 
 " Automatically set working directory to the directory of currently opened file
 set autochdir
@@ -101,16 +97,9 @@ set confirm
 " Status line
 " Always show the status line
 set laststatus=2
-" File name and flags
-set statusline=%1*%m%*%2*%r%*%3*%h%w%*%f\ %<
-" File position
-set statusline+=%=Col:%3*%03c%*\ Ln:%3*%04l/%04L%*
-" File type and attributes
-set statusline+=%(\ File:%3*%{join(filter([&filetype,&fileformat!=split(&fileformats,',')[0]?&fileformat:'',&fileencoding!=split(&fileencodings,',')[0]?&fileencoding:''],'!empty(v:val)'),'/')}%*%)
 
 " Title
 set title
-set titlestring=%t%(\ %m%)%(\ %r%)%(\ %h%)%(\ %w%)%(\ (%{expand(\"%:p:~:h\")})%)\ -\ VIM
 
 " The cursor is not allowed to be positioned one character past the line
 set selection=old
@@ -125,9 +114,6 @@ set smarttab
 
 " paranoid mode
 " set secure
-
-" Use shortened dialogs
-set shortmess=fimnrxoOtTI
 
 " Always show the number of lines changed
 set report=0
@@ -156,8 +142,7 @@ if has("unix")
 endif
 
 " File encoding check order
-set fileencodings=ucs-bom,utf-8,cp1251,koi8-r,latin1
-
+set fileencodings=ucs-bom,utf-8,latin1
 
 if has("unix")
 	" Support cyrillic keyboard mapping for commands and shortcuts
@@ -186,22 +171,16 @@ if has("folding")
 	set foldlevel=99
 endif
 
-" --- GUI-specific settings ---
+set autoindent
+set cindent
 
-if has("gui_running")
-	aunmenu *
-	set lines=45 columns=140
-	set guioptions=aci
-	set mousemodel=popup
-	set mousefocus
-	set nomousehide
-	set browsedir=buffer
-endif
+set guioptions-=T
+set guioptions-=m
 
 " ------------------------ Key mappings start
 " Toggle Paste mode
-nnoremap <C-P> :set invpaste paste?<CR>
-set pastetoggle=<C-P>
+nnoremap <leader>p :set invpaste paste?<CR>
+set pastetoggle=<leader>p
 
 " Open VIM config
 nnoremap <silent>,v :tabnew $MYVIMRC<CR>
@@ -209,10 +188,6 @@ nnoremap <silent>,v :tabnew $MYVIMRC<CR>
 " Preserve selection while shifting
 vnoremap < <gv
 vnoremap > >gv
-
-" Search for the word under cursor
-nnoremap * g*N
-nnoremap # g#N
 
 " Search in selected region
 vnoremap g/ <ESC>/\%V
@@ -243,67 +218,34 @@ inoremap <PAGEDOWN> <C-O><C-D>
 vnoremap <PAGEUP> <C-U>
 vnoremap <PAGEDOWN> <C-D>
 
-" new tab
-nnoremap <C-T> :tabnew<CR>
-inoremap <C-T> <C-O>:tabnew<CR>
-vnoremap <C-T> <ESC>:tabnew<CR>
-
-" go to left tab
-nnoremap <silent><A-LEFT> :call TabAction("jump", "left")<CR>
-inoremap <silent><A-LEFT> <C-O>:call TabAction("jump", "left")<CR>
-vnoremap <silent><A-LEFT> <ESC>:call TabAction("jump", "left")<CR>
-
-" go to right tab
-nnoremap <silent><A-RIGHT> :call TabAction("jump", "right")<CR>
-inoremap <silent><A-RIGHT> <C-O>:call TabAction("jump", "right")<CR>
-vnoremap <silent><A-RIGHT> <ESC>:call TabAction("jump", "right")<CR>
-
-" go to first tab
-nnoremap <A-UP> :tabfirst<CR>
-inoremap <A-UP> <C-O>:tabfirst<CR>
-vnoremap <A-UP> <ESC>:tabfirst<CR>
-
-" go to last tab
-nnoremap <A-DOWN> :tablast<CR>
-inoremap <A-DOWN> <C-O>:tablast<CR>
-vnoremap <A-DOWN> <ESC>:tablast<CR>
-
-" move tab to far left position
-nnoremap <A-S-UP> :tabmove 0<CR>
-inoremap <A-S-UP> <C-O>:tabmove 0<CR>
-vnoremap <A-S-UP> <ESC>:tabmove 0<CR>
-
-" move tab to far right position
-nnoremap <A-S-DOWN> :tabmove<CR>
-inoremap <A-S-DOWN> <C-O>:tabmove<CR>
-vnoremap <A-S-DOWN> <ESC>:tabmove<CR>
-
-" move tab to the left
-nnoremap <silent><A-S-LEFT> :call TabAction("move", "left")<CR>
-inoremap <silent><A-S-LEFT> <C-O>:call TabAction("move", "left")<CR>
-vnoremap <silent><A-S-LEFT> <ESC>:call TabAction("move", "left")<CR>
-
-" move tab to the right
-nnoremap <silent><A-S-RIGHT> :call TabAction("move", "right")<CR>
-inoremap <silent><A-S-RIGHT> <C-O>:call TabAction("move", "right")<CR>
-vnoremap <silent><A-S-RIGHT> <ESC>:call TabAction("move", "right")<CR>
+nnoremap g1 1gt
+nnoremap g2 2gt
+nnoremap g3 3gt
+nnoremap g4 4gt
+nnoremap g5 5gt
+nnoremap g6 6gt
+nnoremap g7 7gt
+nnoremap g8 8gt
+nnoremap g9 9gt
 
 " search for a text under cursor
 vnoremap <silent>* <ESC>:call VisualSearch("?")<CR>?<CR>/<CR>
 vnoremap <silent># <ESC>:call VisualSearch("/")<CR>/<CR>?<CR>
-
-" remove trailing spaces
-nnoremap <silent>,t :call RemoveTrailingSpaces()<CR>:echo "trailing spaces removed"<CR>
 
 " stop highlighting search results
 nnoremap <C-H> :nohlsearch<CR>:echo "nohlsearch"<CR>
 inoremap <C-H> <C-O>:nohlsearch<CR><C-O>:echo "nohlsearch"<CR>
 vnoremap <C-H> <ESC>:nohlsearch<CR>:echo "nohlsearch"<CR>
 
+" location list navigation
+nnoremap <leader>l] :lnext<cr>
+nnoremap <leader>l[ :lprevious<cr>
+nnoremap <leader>ll :ll<cr>
+
 " ------------------------ Key mappings end
 
 " Setting omnifunc as default syntaxComplete
-set ofu=syntaxcomplete#Complete
+"set ofu=syntaxcomplete#Complete
 
 if has("autocmd")
 
@@ -318,43 +260,28 @@ if has("autocmd")
 	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 	" Pretty-print XML files
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
-	" Highlight trailing whitespaces
-	highlight ExtraWhitespace ctermbg=red guibg=red
-	match ExtraWhitespace /\s\+$/
-	autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-	autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-	autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-	autocmd BufWinLeave * call clearmatches()
+	autocmd FileType java nnoremap <buffer> <leader>gg :JavaSearchContext<cr>
+	autocmd FileType java nnoremap <buffer> <leader>d :JavaDocSearch -x declarations<cr>
+	autocmd FileType java nnoremap <buffer> <leader>jc :JavaCorrect <cr>
+	autocmd FileType java nnoremap <buffer> <leader>js :SyntasticCheck <cr>
+	autocmd FileType java nnoremap <buffer> <leader>i :JavaImport<cr>
+	autocmd FileType java nnoremap <buffer> <leader>jo :JavaImportOrganize<cr>
 
+    " Set this to have long lines wrap inside comments.
+    setlocal textwidth=79
+
+    " Enable folding of block structures in fish.
+    setlocal foldmethod=expr
 endif
 
 
 if exists("*function")
-
-	" tab management
-	function! TabAction(action, direction)
-		let l:tablen=tabpagenr("$")
-		let l:tabcur=tabpagenr()
-		if a:direction=="left" && l:tabcur>1
-			if a:action=="jump"
-				execute "tabprevious"
-			elseif a:action=="move"
-				execute "tabmove" l:tabcur-2
-			endif
-		elseif a:direction=="right" && l:tabcur!=l:tablen
-			if a:action=="jump"
-				execute "tabnext"
-			elseif a:action=="move"
-				execute "tabmove" l:tabcur
-			endif
-		endif
-	endfunction
 
 	" search in selection
 	function! VisualSearch(dirrection)
@@ -378,12 +305,6 @@ if exists("*function")
 		endif
 	endfunction
 
-	function! RemoveTrailingSpaces()
-		normal! mzHmy
-		execute "%s:\\s\\+$::ge"
-		normal! 'yzt`z
-	endfunction
-
 endif
 
 " auto-create folders
@@ -396,36 +317,26 @@ if !isdirectory(&directory)
 endif
 
 " read extra config from vimrc.local
-if filereadable($HOME.'/.vimrc.local')
-	source $HOME.'/.vimrc.local'
+if filereadable('~/.vimrc.local')
+	source '~/.vimrc.local'
 endif
 
-set autoindent
-set cindent
-
-set guioptions-=T
-set guioptions-=m
-
-if has('gui')
+if has('gui_running')
 	if has('win32')
 		set guifont=Terminus:h12:cRUSSIAN
 	else
-		set guifont=Terminus\ 14
+		set guifont=Terminus\ 12
 	endif
 endif
 
 " Plugin related configs
 
-" TagList
-nnoremap <silent> <S-TAB> :TlistToggle<CR>
-
 " NERDTree
-nnoremap <silent> <TAB> :NERDTreeToggle<CR>
+nnoremap <silent> <S-TAB> :NERDTreeToggle<CR>
 
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
+" BufExplorer
+nnoremap <silent> <TAB> :ToggleBufExplorer<CR>
+
 let g:SuperTabDefaultCompletionType = "context"
 
 let ropevim_guess_project=1
@@ -433,22 +344,59 @@ let ropevim_goto_def_newwin=1
 let ropevim_vim_completion=0
 let ropevim_extended_complete=1
 
-imap \/ <C-R>=RopeCodeAssistInsertMode()<cr>
+"imap \/ <C-R>=RopeCodeAssistInsertMode()<cr>
 
-" call pathogen#runtime_append_all_bundles("bundle-enabled")
-
-" Color scheme
-if has('gui')
-	" Enable solarized colorscheme in GUI
-	let g:solarized_italic=0
-	colorscheme solarized
+" base-16
+if filereadable(expand("~/.vimrc_background"))
+	set t_Co=256
+	let base16colorspace=256
+	source ~/.vimrc_background
 else
-	" Use 256-jungle in terminal
-	colorscheme 256-jungle
+	set t_Co=16
+	set background=dark
+	let g:solarized_italic=0
+    colorscheme solarized
 endif
 
-" Syntastic
-" Disable python checkers because we use pyflakes-vim for that
-let g:syntastic_python_checkers = []
+" Eclim
+
+let g:EclimCompletionMethod = 'omnifunc'
+let g:EclimLoggingDisabled = 1
+
+" CtrlP
+let g:ctrlp_root_markers = ['.rootdir']
+if executable("ag")
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" Ag
+let g:ag_working_path_mode="r"
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_complete_in_comments = 0
+let g:ycm_complete_in_strings = 0
+let g:ycm_min_num_identifier_candidate_chars = 3
+let g:ycm_auto_trigger = 0
+
+" Vigor
+let g:vig_default_debug_port = 5005
+
+" Powerline
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+" Kythe LSP
+nnoremap <leader>gd  :<c-u>LspDefinition<cr>
+
+" Projectionist
+nnoremap <silent> <S-A> :A<CR>
+
+" Gundo
+nnoremap <leader>u :<c-u>GundoToggle<CR>
+
+filetype plugin indent on
 
 " vim:tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
