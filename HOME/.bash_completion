@@ -1,7 +1,0 @@
-for x in `find $HOME/.bash_completion.d/ -mindepth 1 -maxdepth 1`; do
-    . $x;
-done
-
-for x in `find /etc/bash_completion.d/ -mindepth 1 -maxdepth 1`; do
-    . $x;
-done
