@@ -1,0 +1,15 @@
+[user]
+	name = Nikolay Zakharov
+	email = nikolay@desh.su
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+
+[push]
+    default = matching
+
+[core]
+    editor = vim
+

@@ -65,3 +65,5 @@ fisherman: ${FISH_DIR}/functions/fisher.fish
 	fish -c "fisher bobthefish"
 
 fish: base16 ${FISH_DIR}/config.fish ${FISH_DIR}/conf.d fisherman
+
+git: ${HOME}/.gitconfig
