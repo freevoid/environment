@@ -62,6 +62,6 @@ ${FISH_DIR}/conf.d: HOME/.config/fish/conf.d ${FISH_DIR}
 	cp -r $< ${FISH_DIR}/
 fisherman: ${FISH_DIR}/functions/fisher.fish
 	fish -c "fisher z"
-	fish -c "fisher bobthefish"
+	fish -c "fisher oh-my-fish/theme-bobthefish"
 
 fish: base16 ${FISH_DIR}/config.fish ${FISH_DIR}/conf.d fisherman
