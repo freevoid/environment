@@ -36,9 +36,15 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-projectionist'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/LargeFile'
 Plug 'vim-scripts/taglist.vim'
 Plug 'wannesm/wmgraphviz.vim'
+
+if filereadable('~/.vimrc_local_plugins')
+	source '~/.vimrc_local_plugins'
+endif
 
 call plug#end()
 
@@ -56,18 +62,10 @@ set undolevels=2048
 " Backup properties
 set nobackup
 set writebackup
-if has("win32")
-	set backupdir=~\\vimfiles\\backup
-else
-	set backupdir=~/.vim/backup
-endif
+set backupdir=~/.vim/backup
 
 " Save swap files in separate folder
-if has("win32")
-	set directory=~\\vimfiles\\swap
-else
-	set directory=~/.vim/swap
-endif
+set directory=~/.vim/swap
 
 " Allow using backspace in insert mode
 set backspace=indent,eol,start
@@ -162,7 +160,7 @@ if has("mouse")
 	set mouse=a
 endif
 
-if has("clipboard")
+if has("clipboard") && !has("nvim")
 	set clipboard=autoselect
 endif
 
@@ -241,6 +239,7 @@ vnoremap <C-H> <ESC>:nohlsearch<CR>:echo "nohlsearch"<CR>
 nnoremap <leader>l] :lnext<cr>
 nnoremap <leader>l[ :lprevious<cr>
 nnoremap <leader>ll :ll<cr>
+nnoremap <leader>le :Errors<cr>
 
 " ------------------------ Key mappings end
 
@@ -275,9 +274,6 @@ if has("autocmd")
 
     " Set this to have long lines wrap inside comments.
     setlocal textwidth=79
-
-    " Enable folding of block structures in fish.
-    setlocal foldmethod=expr
 endif
 
 
@@ -316,17 +312,8 @@ if !isdirectory(&directory)
 	call mkdir(&directory, "p", 0700)
 endif
 
-" read extra config from vimrc.local
-if filereadable('~/.vimrc.local')
-	source '~/.vimrc.local'
-endif
-
 if has('gui_running')
-	if has('win32')
-		set guifont=Terminus:h12:cRUSSIAN
-	else
-		set guifont=Terminus\ 12
-	endif
+	set guifont=Terminus\ 12
 endif
 
 " Plugin related configs
@@ -380,13 +367,10 @@ let g:ycm_complete_in_strings = 0
 let g:ycm_min_num_identifier_candidate_chars = 3
 let g:ycm_auto_trigger = 0
 
-" Vigor
-let g:vig_default_debug_port = 5005
-
 " Powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
 
 " Kythe LSP
 nnoremap <leader>gd  :<c-u>LspDefinition<cr>
@@ -396,6 +380,19 @@ nnoremap <silent> <S-A> :A<CR>
 
 " Gundo
 nnoremap <leader>u :<c-u>GundoToggle<CR>
+
+"Airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_theme='powerlineish'
+call airline#parts#define_accent('linenr', 'none')
+call airline#parts#define_accent('maxlinenr', 'none')
+
+" read extra config from vimrc_local
+if filereadable('~/.vimrc_local')
+	source '~/.vimrc_local'
+endif
 
 filetype plugin indent on
 

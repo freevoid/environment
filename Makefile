@@ -1,4 +1,4 @@
-.PHONY: vim scripts texmf X
+.PHONY: scripts texmf X
 
 BASH_CONFIGS=$(patsubst HOME/%, ${HOME}/%, $(wildcard HOME/.bash*))
 
@@ -13,8 +13,10 @@ common: vim bash fish tmux scripts
 
 full: common texmf X
 
-scripts:
+~/bin/:
 	mkdir -p ${HOME}/bin/
+
+scripts: ${HOME}/bin
 	cp -r HOME/bin/* ${HOME}/bin/
 
 bash: $(BASH_CONFIGS)
@@ -37,10 +39,30 @@ powerline: ~/.local/bin/powerline
 ~/.local/bin/powerline:
 	pip install --user --upgrade powerline-status
 
-vim: powerline
+vim: powerline vimplug vimrc
+
+vimrc: ${HOME}/.vimrc
+
+~/.vimrc: HOME/.vimrc
+	cp HOME/.vimrc ${HOME}/
+
+vimplug: ${HOME}/.vim/autoload/plug.vim
+
+~/.vim/autoload/plug.vim:
 	curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs \
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	cp HOME/.vimrc ${HOME}/
+
+~/bin/nvim: ${HOME}/bin/nvim.appimage
+	ln -s ${HOME}/bin/nvim.appimage ${HOME}/bin/nvi
+	ln -s ${HOME}/bin/nvim.appimage ${HOME}/bin/nvim
+~/bin/nvim.appimage: ${HOME}/bin/
+	curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o ${HOME}/bin/nvim.appimage
+	chmod u+x ${HOME}/bin/nvim.appimage
+nvim: vim ${HOME}/.config/nvim ${HOME}/bin/nvim
+
+${HOME}/.config/nvim:
+	ln -s ${HOME}/.vim ${HOME}/.config/nvim
+	ln -sf ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
 
 texmf:
 	mkdir -p ${HOME}/texmf/
