@@ -3,7 +3,7 @@ filetype off
 
 " Make sure VIM uses POSIX-compatible shell
 if &shell =~# 'fish$'
-    set shell=bash
+	set shell=bash
 endif
 
 " set the runtime path to include Vundle and initialize
@@ -42,8 +42,8 @@ Plug 'vim-scripts/LargeFile'
 Plug 'vim-scripts/taglist.vim'
 Plug 'wannesm/wmgraphviz.vim'
 
-if filereadable('~/.vimrc_local_plugins')
-	source '~/.vimrc_local_plugins'
+if filereadable(expand("~/.vimrc_local_plugins"))
+	source ~/.vimrc_local_plugins
 endif
 
 call plug#end()
@@ -272,8 +272,8 @@ if has("autocmd")
 	autocmd FileType java nnoremap <buffer> <leader>i :JavaImport<cr>
 	autocmd FileType java nnoremap <buffer> <leader>jo :JavaImportOrganize<cr>
 
-    " Set this to have long lines wrap inside comments.
-    setlocal textwidth=79
+	" Set this to have long lines wrap inside comments.
+	setlocal textwidth=79
 endif
 
 
@@ -342,7 +342,7 @@ else
 	set t_Co=16
 	set background=dark
 	let g:solarized_italic=0
-    colorscheme solarized
+	colorscheme solarized
 endif
 
 " Eclim
@@ -385,13 +385,14 @@ nnoremap <leader>u :<c-u>GundoToggle<CR>
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline_theme='powerlineish'
 call airline#parts#define_accent('linenr', 'none')
 call airline#parts#define_accent('maxlinenr', 'none')
 
 " read extra config from vimrc_local
-if filereadable('~/.vimrc_local')
-	source '~/.vimrc_local'
+if filereadable(expand("/.vimrc_local"))
+	source ~/.vimrc_local
 endif
 
 filetype plugin indent on
