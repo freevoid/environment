@@ -391,7 +391,7 @@ call airline#parts#define_accent('linenr', 'none')
 call airline#parts#define_accent('maxlinenr', 'none')
 
 " read extra config from vimrc_local
-if filereadable(expand("/.vimrc_local"))
+if filereadable(expand("~/.vimrc_local"))
 	source ~/.vimrc_local
 endif
 
