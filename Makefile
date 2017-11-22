@@ -58,7 +58,8 @@ vimplug: ${HOME}/.vim/autoload/plug.vim
 ~/bin/nvim.appimage: ${HOME}/bin/
 	curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o ${HOME}/bin/nvim.appimage
 	chmod u+x ${HOME}/bin/nvim.appimage
-nvim: vim ${HOME}/.config/nvim ${HOME}/bin/nvim
+nvim_linux: ${HOME}/bin/nvim nvim
+nvim: vim ${HOME}/.config/nvim
 
 ${HOME}/.config/nvim:
 	ln -s ${HOME}/.vim ${HOME}/.config/nvim
