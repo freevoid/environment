@@ -53,6 +53,10 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [-d "$HOME/.cargo/bin" ] ; then
+    PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # including local file to source environment-specific stuff
 if [ -f ~/.bash_local ] ; then
     . ~/.bash_local
