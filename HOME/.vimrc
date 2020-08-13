@@ -9,6 +9,7 @@ endif
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
+"Plug 'w0rp/ale'
 Plug 'mhinz/vim-startify'
 Plug 'Shougo/vimproc.vim'
 Plug 'sheerun/vim-polyglot'
@@ -410,5 +411,8 @@ if filereadable(expand("~/.vimrc_local"))
 endif
 
 filetype plugin indent on
+
+set exrc
+set secure
 
 " vim:tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
