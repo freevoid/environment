@@ -9,7 +9,7 @@ BASE16_SHELL_PATH=${DOTCONFIG_PATH}/base16-shell
 ${HOME}/.%: HOME/.%
 	cp -r $< ${HOME}
 
-common: vim bash fish tmux scripts
+common: nvim bash fish tmux scripts
 
 full: common texmf X
 
@@ -39,7 +39,7 @@ powerline: ~/.local/bin/powerline
 ~/.local/bin/powerline:
 	pip install --user --upgrade powerline-status
 
-vim: powerline vimplug vimrc
+vim: vimplug vimrc
 
 vimrc: ${HOME}/.vimrc
 
@@ -83,8 +83,8 @@ ${FISH_DIR}/config.fish: HOME/.config/fish/config.fish ${FISH_DIR}
 	cp -r $< ${FISH_DIR}/config.fish
 ${FISH_DIR}/conf.d: HOME/.config/fish/conf.d ${FISH_DIR}
 	cp -r $< ${FISH_DIR}/
-fisherman: ${FISH_DIR}/functions/fisher.fish
-	fish -c "fisher z"
-	fish -c "fisher oh-my-fish/theme-bobthefish"
+fisher: ${FISH_DIR}/functions/fisher.fish
+	fish -c "fisher add z"
+	fish -c "fisher add oh-my-fish/theme-bobthefish"
 
-fish: base16 ${FISH_DIR}/config.fish ${FISH_DIR}/conf.d fisherman
+fish: base16 ${FISH_DIR}/config.fish ${FISH_DIR}/conf.d fisher
