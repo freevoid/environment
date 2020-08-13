@@ -9,7 +9,10 @@ endif
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
+Plug 'mhinz/vim-startify'
 Plug 'Shougo/vimproc.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'ryanoasis/vim-devicons'
 Plug 'Valloric/ListToggle'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'altercation/vim-colors-solarized'
@@ -24,8 +27,6 @@ Plug 'kana/vim-fakeclip'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -41,6 +42,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/LargeFile'
 Plug 'vim-scripts/taglist.vim'
 Plug 'wannesm/wmgraphviz.vim'
+Plug 'SirVer/ultisnips'
+Plug 'liuchengxu/vista.vim'
 
 if filereadable(expand("~/.vimrc_local_plugins"))
 	source ~/.vimrc_local_plugins
@@ -324,6 +327,13 @@ nnoremap <silent> <S-TAB> :NERDTreeToggle<CR>
 " BufExplorer
 nnoremap <silent> <TAB> :ToggleBufExplorer<CR>
 
+" Vista
+nnoremap <silent> <leader>t :<c-u>Vista!!<CR>
+" default: ["╰─▸ ", "├─▸ "]
+let g:vista_icon_indent = ["▸ ", ""]
+let g:vista_sidebar_width = 50
+
+
 let g:SuperTabDefaultCompletionType = "context"
 
 let ropevim_guess_project=1
@@ -365,23 +375,22 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_complete_in_comments = 0
 let g:ycm_complete_in_strings = 0
 let g:ycm_min_num_identifier_candidate_chars = 3
-let g:ycm_auto_trigger = 0
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_auto_trigger = 1
 
 " Powerline
 " python from powerline.vim import setup as powerline_setup
 " python powerline_setup()
 " python del powerline_setup
 
-" Kythe LSP
-nnoremap <leader>gd  :<c-u>LspDefinition<cr>
-
 " Projectionist
-nnoremap <silent> <S-A> :A<CR>
+nnoremap <silent> <C-A> :A<CR>
 
 " Gundo
 nnoremap <leader>u :<c-u>GundoToggle<CR>
 
 "Airline
+let g:airline_extensions = ['tabline', 'hunks', 'ycm', 'syntastic', 'ctrlp', 'quickfix', 'branch', 'csv']
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -389,6 +398,11 @@ let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline_theme='powerlineish'
 call airline#parts#define_accent('linenr', 'none')
 call airline#parts#define_accent('maxlinenr', 'none')
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " read extra config from vimrc_local
 if filereadable(expand("~/.vimrc_local"))
