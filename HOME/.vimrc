@@ -38,6 +38,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/LargeFile'
@@ -45,6 +46,8 @@ Plug 'vim-scripts/taglist.vim'
 Plug 'wannesm/wmgraphviz.vim'
 Plug 'SirVer/ultisnips'
 Plug 'liuchengxu/vista.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 if filereadable(expand("~/.vimrc_local_plugins"))
 	source ~/.vimrc_local_plugins
@@ -391,7 +394,7 @@ nnoremap <silent> <C-A> :A<CR>
 nnoremap <leader>u :<c-u>GundoToggle<CR>
 
 "Airline
-let g:airline_extensions = ['tabline', 'hunks', 'ycm', 'syntastic', 'ctrlp', 'quickfix', 'branch', 'csv']
+let g:airline_extensions = ['tabline', 'hunks', 'syntastic', 'ctrlp', 'quickfix', 'branch']
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1

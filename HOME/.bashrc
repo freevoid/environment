@@ -64,6 +64,11 @@ fi
 
 export PATH=$PATH
 
+export WORKON_HOME=~/.venvs
+if [ -f ~/.bash_neovim_py3_venv ] ; then
+    . ~/.bash_neovim_py3_venv
+fi
+
 # Start fish shell if available
 if [ ! -f ~/.bash_fish_off ] ; then
     WHICH_FISH=$(which fish)
